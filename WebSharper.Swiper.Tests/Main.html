@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,38 +31,31 @@
         }
     </style>
 </head>
-<body>
-    <!-- Static navbar -->
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Your App</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav" data-hole="menubar"></ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="http://websharper.com">websharper.com</a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div>
-    </nav>
+<body id="asd">
     <div class="container">
-        <div data-replace="body">
+        <div ws-replace="body">
+        </div>
+        <div id="test-content" style="position: fixed; z-index: -1; left: 100%;">
+            <div class="swp-cont">
+                <div class="swp-wrap">
+                    <div class="swp-slide" data-hash="slide1">Slide 1</div>
+                    <div class="swp-slide" data-hash="slide2">Slide 2</div>
+                    <div class="swp-slide" data-hash="slide3">Slide 3</div>
+                    <div class="swp-slide" data-hash="slide4">Slide 4</div>
+                    <div class="swp-slide" data-hash="slide5">Slide 5</div> 
+                </div>
+            </div>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" data-hash="slide1">Slide 1</div>
+                    <div class="swiper-slide" data-hash="slide2">Slide 2</div>
+                    <div class="swiper-slide" data-hash="slide3">Slide 3</div>
+                    <div class="swiper-slide" data-hash="slide4">Slide 4</div>
+                    <div class="swiper-slide" data-hash="slide5">Slide 5</div>
+                </div>
+            </div>
         </div>
     </div>
-    <footer class="footer">
-        <div class="container">
-            <p class="text-muted">
-                For an enhanced template that provides automatic GitHub deployment to Azure, fork from <a href="https://github.com/intellifactory/ClientServer.Azure">GitHub</a>, or
-                read more <a href="http://websharper.com/blog-entry/4368/deploying-websharper-apps-to-azure-via-github">here</a>.
-            </p>
-        </div>
-    </footer>
-    <script data-replace="scripts"></script>
+    <script ws-replace="scripts"></script>
 </body>
 </html>

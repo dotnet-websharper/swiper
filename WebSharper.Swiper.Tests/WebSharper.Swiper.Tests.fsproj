@@ -37,10 +37,11 @@
     <Name>WebSharper.Swiper.Tests</Name>
     <RootNamespace>$(Name)</RootNamespace>
     <AssemblyName>$(Name)</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Client.fs" />
     <Compile Include="Main.fs" />
     <Content Include="Main.html" />
     <Content Include="Web.config" />
@@ -54,6 +55,7 @@
     <Reference Include="System.Web.DynamicData.dll" />
     <Reference Include="System.Web.Entity.dll" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq.dll" />
     <Reference Include="System.Xml.Linq.dll" />
     <Reference Include="System.Xml.Linq.dll" />
   </ItemGroup>

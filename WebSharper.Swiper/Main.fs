@@ -106,6 +106,24 @@ module Definition =
 
     let CallbackEvent = (SwiperClass * T<WebSharper.JavaScript.Dom.Event>) ^-> T<unit>
 
+    let TouchEvent =
+        Pattern.Config "touchEvent" {
+            Required =
+                [
+                    "startX", T<int>
+                    "startY", T<int>
+                    "currentX", T<int>
+                    "currentY", T<int>
+                    "diff", T<int>
+                ]
+            Optional = []
+        }
+
+    let SlideType = T<Dom.Element>
+                  + T<string>
+                  + Type.ArrayOf T<Dom.Element>
+                  + Type.ArrayOf T<string>
+
     let SwiperParameters = 
         Pattern.Config "SwipeParameters" {
             Required = []
@@ -322,6 +340,68 @@ module Definition =
         SwiperClass
         |+> Instance [
             Constructor ((T<string> + T<Dom.Element>) * !? SwiperParameters.Type)
+            "params" =? SwiperParameters.Type
+            "container" =? T<JQuery.JQuery>
+            "wrapper" =? T<JQuery.JQuery>
+            "slides" =? T<JQuery.JQuery>
+            "nextButton" =? T<JQuery.JQuery>
+            "prevButton" =? T<JQuery.JQuery>
+            "bullets" =? T<JQuery.JQuery>
+            "width" =? T<int>
+            "height" =? T<int>
+            "translate" =? T<int>
+            "progress" =? T<float>
+            "activeIndex" =? T<int>
+            "realIndex" =? T<int>
+            "previousIndex" =? T<int>
+            "isBeginning" =? T<bool>
+            "isEnd" =? T<bool>
+            "autoplaying" =? T<bool>
+            "animating" =? T<bool>
+            "touches" =? TouchEvent.Type
+            "clickedIndex" =? T<int>
+            "clickedSlide" =? T<Dom.Element>
+            
+            "slideNext" => !? T<bool>?runCallbacks * !? T<int>?speed ^-> T<unit>
+            "slidePrev" => !? T<bool>?runCallbacks * !? T<int>?speed ^-> T<unit>
+            "slideTo" => T<int>?index * !? T<int>?speed * !?T<bool>?runCallbacks ^-> T<unit>
+            
+            "update" => !? T<bool>?updateTranslate ^-> T<unit>
+            
+            "onResize" => T<unit> ^-> T<unit>
+            "detachEvents" => T<unit> ^-> T<unit>
+            "attachEvents" => T<unit> ^-> T<unit>
+            "startAutoplay" => T<unit> ^-> T<unit>
+            "stopAutoplay" => T<unit> ^-> T<unit>
+            
+            "destroy" => !? T<bool>?deleteInstance * !? T<bool>?cleanupStyles ^-> T<unit>
+            
+            "appendSlide" => SlideType ^-> T<unit>
+            "prependSlide" => SlideType ^-> T<unit>
+            "removeSlide" => SlideType ^-> T<unit>
+            "removeAllSlides" => T<unit> ^-> T<unit>
+
+            "setWrapperTranslate" => T<float> ^-> T<unit>
+            "getWrapperTranslate" => T<unit> ^-> T<float>
+
+            "on" => T<string>?callback * T<JavaScript.Function>?handler ^-> TSelf
+            "once" => T<string>?callback * T<JavaScript.Function>?handler ^-> TSelf
+            "off" => T<string>?callback ^-> TSelf
+
+            "lockSwipeToNext" => T<unit> ^-> T<unit>
+            "unlockSwipeToNext" => T<unit> ^-> T<unit>
+            "lockSwipeToPrev" => T<unit> ^-> T<unit>
+            "unlockSwipeToPrev" => T<unit> ^-> T<unit>
+            "lockSwipes" => T<unit> ^-> T<unit>
+            "unlockSwipes" => T<unit> ^-> T<unit>
+            "disableMousewheelControl" => T<unit> ^-> T<unit>
+            "enableMousewheelControl" => T<unit> ^-> T<unit>
+            "disableKeyboardControl" => T<unit> ^-> T<unit>
+            "enableKeyboardControl" => T<unit> ^-> T<unit>
+            "disableTouchControl" => T<unit> ^-> T<unit>
+            "enableTouchControl" => T<unit> ^-> T<unit>
+            "unsetGrabCursor" => T<unit> ^-> T<unit>
+            "setGrabCursor" => T<unit> ^-> T<unit>
         ]
 
 

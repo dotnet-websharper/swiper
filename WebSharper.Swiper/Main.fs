@@ -338,8 +338,10 @@ module Definition =
 
     let Swiper =
         SwiperClass
-        |+> Instance [
+        |+> Static [
             Constructor ((T<string> + T<Dom.Element>) * !? SwiperParameters.Type)
+        ]
+        |+> Instance [
             "params" =? SwiperParameters.Type
             "container" =? T<JQuery.JQuery>
             "wrapper" =? T<JQuery.JQuery>
@@ -409,8 +411,24 @@ module Definition =
     let Assembly =
         Assembly [
             Namespace "WebSharper.Swiper.Resources" [
+                Resource "Css" "https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.css" |> AssemblyWide
+                Resource "Js" "https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.js" |> AssemblyWide
             ]
             Namespace "WebSharper.Swiper" [
+                Effect
+                Cube
+                Fade
+                Coverflow
+                Flip
+                Direction
+                ColumnFill
+                TouchEventsTarget
+                PaginationType
+                Auto
+                ControlBy
+                TouchEvent
+                SwiperParameters
+                Swiper
             ]
         ]
 

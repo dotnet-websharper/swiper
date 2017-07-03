@@ -8,26 +8,76 @@
     <style>
         /* Don't show the not-yet-loaded templates */
         [ws-template], [ws-children-template] { display: none; }
+        #container {
+            width: 500px;
+            margin: auto;
+        }
+        .swiper-container {
+            width: 500px;
+            height: 300px;
+            margin: 20px auto;
+        }
+
+        .swiper-slide {
+            background-color: lightcyan;
+            text-align: center;
+            font-size: 24px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        .title {
+            display: block;
+        }
     </style>
     <script type="text/javascript" src="Content/WebSharper.Swiper.Sample.head.js"></script>
 </head>
 <body id="main">
-    <div class="swp-cont">
-        <div class="swp-wrap">
-            <div class="swp-slide" data-hash="slide1">Slide 1</div>
-            <div class="swp-slide" data-hash="slide2">Slide 2</div>
-            <div class="swp-slide" data-hash="slide3">Slide 3</div>
-            <div class="swp-slide" data-hash="slide4">Slide 4</div>
-            <div class="swp-slide" data-hash="slide5">Slide 5</div>
-        </div>
-    </div>
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide" data-hash="slide1">Slide 1</div>
-            <div class="swiper-slide" data-hash="slide2">Slide 2</div>
-            <div class="swiper-slide" data-hash="slide3">Slide 3</div>
-            <div class="swiper-slide" data-hash="slide4">Slide 4</div>
-            <div class="swiper-slide" data-hash="slide5">Slide 5</div>
+    <div id="container">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" data-hash="slide1">Let's look at F# syntax!</div>
+                <div class="swiper-slide" data-hash="slide2">
+                    This is how we create an array:
+                </div>
+                <div class="swiper-slide" data-hash="slide3">
+                    <pre>let myArray = [|1; 2; 3|]</pre>
+                </div>
+                <div class="swiper-slide" data-hash="slide4">
+                    This is how we create a list:
+                </div>
+                <div class="swiper-slide" data-hash="slide4">
+                    <pre>let myList = [1; 2; 3]</pre>
+                </div>
+                <div class="swiper-slide" data-hash="slide5">
+                    This is how we create a sequence:
+                </div>
+                <div class="swiper-slide" data-hash="slide6">
+                    <pre>let mySequence = seq { 1..3 }</pre>
+                </div>
+                <div class="swiper-slide" data-hash="slide7">
+                    Question! <br/> Which is the correct syntax to define a list?
+                </div>
+                <div class="swiper-slide" data-hash="slide8">
+                    <ol type="A">
+                        <li><pre>let myList = [|1; 2; 3|]</pre></li>
+                        <li><pre>let myList = seq { 1..3 }</pre></li>
+                        <li><pre>let myList = [1; 2; 3]</pre></li>
+                    </ol>
+                </div>
+                <div class="swiper-slide" data-hash="slide9">
+                    Good job!
+                </div>
+            </div>
         </div>
     </div>
     <script type="text/javascript" src="Content/WebSharper.Swiper.Sample.min.js"></script>

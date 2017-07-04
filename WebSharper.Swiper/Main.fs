@@ -212,10 +212,10 @@ module Definition =
                     "paginationHide", T<bool>
                     "paginationClickable", T<bool>
                     "paginationElement", T<string>
-                    "paginationBulletRender", TSelf * T<int> * T<string> ^-> T<string> 
-                    "paginationFractionRender", TSelf * T<string> * T<string> ^-> T<string>
-                    "paginationProgressRender", TSelf * T<string> ^-> T<string>
-                    "paginationCustomRender", TSelf * T<int> * T<int> ^-> T<string>
+                    "paginationBulletRender", SwiperClass * T<int> * T<string> ^-> T<string> 
+                    "paginationFractionRender", SwiperClass * T<string> * T<string> ^-> T<string>
+                    "paginationProgressRender", SwiperClass * T<string> ^-> T<string>
+                    "paginationCustomRender", SwiperClass * T<int> * T<int> ^-> T<string>
                     //Navigation Buttons
                     "nextButton", T<string> + T<JavaScript.Dom.Element>
                     "prevButton", T<string> + T<JavaScript.Dom.Element>

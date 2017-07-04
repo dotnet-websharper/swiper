@@ -20,7 +20,8 @@ for example:
         <div class="swiper-slide" data-hash="slide9">Slide 9</div>
         <div class="swiper-slide" data-hash="slide10">Slide 10</div>
     </div>
-</div>```
+</div>
+```
 
 You have two ways to instantiate the Swiper object: You can pass
 the HTML selector for yor swiper contrainer (`.swiper-container` in
@@ -67,6 +68,23 @@ only minor differences, which are listed below.
 By F# naming conventions, all class-level names (e.g. methods, properties)
 start with a capital letter.
 
+To pass Dom elements (`WebSharper.Javasctript.Dom.Element`)
+to functions, you can call the `Dom` property of any `Elt`,
+or you can also call the `Html` property of any `Elt` to get
+the HTML text representing that `Elt`.
+
+In the config object when a field can have multiple types, it appears as
+a `WebSharper.JavaScript.Union<_,_>`. You have a range of functions in the
+`WebSharper.JavaScript` namespace for dealing with unions. Let's look at
+an example:
+
+Some parameters in the config object can be assigned `string` or a
+`Dom.Element` so they'll have the type
+`Union<Dom.Element, string>`. To instantiate such a type with a `string`
+value, use `Union2Of2 "example"`. To create it with a `Dom.Element`,
+use `Union1Of2 elt.Dom`. The pattern is the same for different types
+and sizes of unions.
+
 Also to provide some more type safety to the programmer, the F# bind uses
 enums where the Javascript expects a small set of (usually) string constants.
 The new enums and their fields are the following:
@@ -90,25 +108,18 @@ and their fields are listed below.
 Below are all the occurences all these new types:
 
 * SwiperParameters
-** Directon
-** Effect
-** Fade
-** Cube
-** Coverflow
-** Flip
-** SlidesPerView
-** TouchEventTarget
-** PaginationType
-** Control
-** ControlBy
+  * Directon
+  * Effect
+  * Fade
+  * Cube
+  * Coverflow
+  * Flip
+  * SlidesPerView
+  * TouchEventTarget
+  * PaginationType
+  * Control
+  * ControlBy
 
 * Swipe
-** Params
-** Touches
-
-## Notes
-
-To pass Dom elements (`WebSharper.Javasctript.Dom.Element`)
-to functions, you can call the `Dom` property of any `Elt`,
-or you can also call the `Html` property of any `Elt` to get
-the HTML text representing that `Elt`.
+  * Params
+  * Touches

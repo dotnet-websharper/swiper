@@ -84,11 +84,11 @@ Some parameters in the config object can be assigned either a `string`
 or a `Dom.Element`, which means they'll have the type
 `Union<Dom.Element, string>`. To instantiate such a type with a `string`
 value, use `Union2Of2 "example"`. To create it with a `Dom.Element`,
-use Union1Of2 elt.Dom. The pattern is the same for different types and
+use `Union1Of2 elt.Dom`. The pattern is the same for different types and
 sizes of unions.
 
 When using the `Union<>` type in C# you can simply assign a value of any
-of the appropriate generic type parameters since there’s an implicit
+of the appropriate generic type parameters since thereâ€™s an implicit
 conversion for every case.
 
 ```fsharp
@@ -127,7 +127,7 @@ constants. The new enums and their fields are the following:
 * **ControlBy** - `Slide`, `Container`
 * **Effect** - `Slide`, `Fade`, `Cube`, `Coverflow`, `Flip`
 
-Smaller config objects also have their on representiaion. These classes
+Smaller config objects also have their on representaion. These classes
 and their fields are listed below.
 
 * **Cube** - `SlideShadows`, `Shadow`, `ShadowOffset`, `ShadowScale`
@@ -135,21 +135,21 @@ and their fields are listed below.
 * **Coverflow** - `Rotate`, `Stretch`, `Depth`, `Modifier`, `SlideShadows`
 * **Flip** - `SlideShadows`, `LimitRotation`
 
-Below are all the occurences all these new types:
+Below are all the occurrences all these new types:
 
-* SwiperParameters
-  * Directon
-  * Effect
-  * Fade
-  * Cube
-  * Coverflow
-  * Flip
-  * SlidesPerView
-  * TouchEventTarget
-  * PaginationType
-  * Control
-  * ControlBy
+* `SwiperParameters`
+  * `Direction`
+  * `Effect`
+  * `Fade`
+  * `Cube`
+  * `Coverflow`
+  * `Flip`
+  * `SlidesPerView`
+  * `TouchEventTarget`
+  * `PaginationType`
+  * `Control`
+  * `ControlBy`
 
-* Swipe
-  * Params
-  * Touches
+* `Swipe`
+  * `Params`
+  * `Touches`

@@ -1,6 +1,6 @@
 # Swiper
 
-[Swiper](http://idangero.us/swiper/#.WVpdM4SGO70) is a Javascript
+[Swiper](http://idangero.us/swiper/#.WVpdM4SGO70) is a JavaScript
 library to easily make modern, touch-driven slides on your website.
 It is designed for iOS but also works on most Android devices and
 Desktop browsers.
@@ -8,7 +8,7 @@ Desktop browsers.
 ## Configuring Swiper
 
 Using Swiper with WebSharper is just like using the original
-Javascript library. The core HTML code will remain the same,
+JavaScript library. The core HTML code will remain the same,
 for example:
 
 ```html
@@ -29,7 +29,7 @@ this case) or you can pass the selector and a configuration object.
 The syntax to create the configuration file is a little different
 in F#.
 
-This is how a usual Javascipt snippet would look like:
+This is how a usual JavaScript snippet would look like:
 ```javascript
     var swiper = new Swiper ('.swiper-container', {
         direction: 'vertical',
@@ -116,7 +116,7 @@ public static void Main()
 ### Enums
 
 Also to provide some more type safety to the programmer, the F# bind uses
-_enums_ where the Javascript expects a small set of (usually) `string`
+_enums_ where the JavaScript API expects a small set of (usually) `string`
 constants. The new enums and their fields are the following:
 
 * **Direction** - `Vertical`, `Horizontal`
@@ -127,7 +127,7 @@ constants. The new enums and their fields are the following:
 * **ControlBy** - `Slide`, `Container`
 * **Effect** - `Slide`, `Fade`, `Cube`, `Coverflow`, `Flip`
 
-Smaller config objects also have their on representaion. These classes
+Smaller config objects also have their on representation. These classes
 and their fields are listed below.
 
 * **Cube** - `SlideShadows`, `Shadow`, `ShadowOffset`, `ShadowScale`
@@ -135,7 +135,7 @@ and their fields are listed below.
 * **Coverflow** - `Rotate`, `Stretch`, `Depth`, `Modifier`, `SlideShadows`
 * **Flip** - `SlideShadows`, `LimitRotation`
 
-Below are all the occurrences all these new types:
+Below are all the occurrences of all these new types:
 
 * `SwiperParameters`
   * `Direction`

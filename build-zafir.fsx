@@ -2,24 +2,24 @@
 open IntelliFactory.Build
 
 let bt =
-    BuildTool().PackageId("Zafir.Swiper")
-        .VersionFrom("Zafir")
+    BuildTool().PackageId("WebSharper.Swiper")
+        .VersionFrom("WebSharper")
 
 let main =
-    bt.Zafir.Extension("WebSharper.Swiper")
+    bt.WebSharper4.Extension("WebSharper.Swiper")
         .SourcesFromProject()
         .Embed([])
         .References(fun r -> [])
 
 let tests =
-    bt.Zafir.SiteletWebsite("WebSharper.Swiper.Tests")
+    bt.WebSharper4.SiteletWebsite("WebSharper.Swiper.Tests")
         .SourcesFromProject()
         .Embed([])
         .References(fun r ->
             [
                 r.Project(main)
-                r.NuGet("Zafir.Testing").Latest(true).Reference()
-                r.NuGet("Zafir.UI.Next").Latest(true).Reference()
+                r.NuGet("WebSharper.Testing").Latest(true).Reference()
+                r.NuGet("WebSharper.UI.Next").Latest(true).Reference()
             ])
 
 bt.Solution [

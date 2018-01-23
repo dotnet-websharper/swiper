@@ -3,10 +3,10 @@ namespace WebSharper.Swiper.Sample
 open WebSharper
 open WebSharper.JavaScript
 open WebSharper.JQuery
-open WebSharper.UI.Next
-open WebSharper.UI.Next.Client
-open WebSharper.UI.Next.Html
-open WebSharper.UI.Next.Templating
+open WebSharper.UI
+open WebSharper.UI.Client
+open WebSharper.UI.Html
+open WebSharper.UI.Templating
 
 [<JavaScript>]
 module Client =
@@ -14,7 +14,7 @@ module Client =
     // and refresh your browser, no need to recompile unless you add or remove holes.
 
     [<SPAEntryPoint>]
-    let Main () =
+    let Main =
         let currentSlideIndex = Var.Create 0
 
         let config = WebSharper.Swiper.SwipeParameters()
@@ -35,7 +35,7 @@ module Client =
                     swiper.UnlockSwipeToNext()
                     swiper.SlideNext()
                     let newSlide () =
-                        divAttr [attr.``class`` "swiper-slide"] [
+                        div [attr.``class`` "swiper-slide"] [
                             text "You have finished the tutorial!"
                         ]
                     swiper.AppendSlide( (newSlide()).Dom )

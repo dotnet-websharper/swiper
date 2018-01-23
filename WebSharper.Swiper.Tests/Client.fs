@@ -2,15 +2,16 @@
 
 open WebSharper
 open WebSharper.Sitelets
-open WebSharper.UI.Next
+open WebSharper.UI
+open WebSharper.JQuery
 
 [<JavaScript>]
 module Client =
     open WebSharper.JavaScript
     open WebSharper.Testing
-    open WebSharper.UI.Next
-    open WebSharper.UI.Next.Client
-    open WebSharper.UI.Next.Html
+    open WebSharper.UI
+    open WebSharper.UI.Client
+    open WebSharper.UI.Html
 
     let Tests =
 
@@ -84,9 +85,9 @@ module Client =
             *)
         }
 
-#if ZAFIR
+    [<SPAEntryPoint>]
     let RunTests() =
         Runner.RunTests [
             Tests
         ]
-#endif
+        |> fun a -> a.ReplaceInDom (JS.Document.QuerySelector("#container"))

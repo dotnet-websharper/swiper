@@ -11,8 +11,8 @@ description
 tags
     Web JavaScript F# C#
 files
-    ../WebSharper.Swiper/bin/Release/netstandard2.0/WebSharper.Swiper.dll ==> lib/net461
-    ../WebSharper.Swiper/bin/Release/netstandard2.0/WebSharper.Swiper.xml ==> lib/net461
+    ../WebSharper.Swiper/bin/Release/net461/WebSharper.Swiper.dll ==> lib/net461
+    ../WebSharper.Swiper/bin/Release/net461/WebSharper.Swiper.xml ==> lib/net461
     ../WebSharper.Swiper/bin/Release/netstandard2.0/WebSharper.Swiper.dll ==> lib/netstandard2.0
     ../WebSharper.Swiper/bin/Release/netstandard2.0/WebSharper.Swiper.xml ==> lib/netstandard2.0
 dependencies

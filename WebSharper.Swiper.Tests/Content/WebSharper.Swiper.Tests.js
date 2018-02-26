@@ -526,6 +526,14 @@ if (!console) {
    return i<s.length&&(e.c=s[i],e.s=i+1,true);
   },void 0);
  };
+ Pervasives.TestCategory=function(name)
+ {
+  return new TestCategoryBuilder.New(name);
+ };
+ Pervasives.Test=function(name)
+ {
+  return new TestBuilder.New(name);
+ };
  TestCategoryBuilder=Pervasives.TestCategoryBuilder=Runtime.Class({},Obj,TestCategoryBuilder);
  TestCategoryBuilder.New=Runtime.Ctor(function(name)
  {
@@ -636,14 +644,6 @@ if (!console) {
   SubtestBuilder.New.call(this);
   this.name=name;
  },TestBuilder);
- Pervasives.Test=function(name)
- {
-  return new TestBuilder.New(name);
- };
- Pervasives.TestCategory=function(name)
- {
-  return new TestCategoryBuilder.New(name);
- };
  Unchecked.Equals=function(a,b)
  {
   var m,eqR,k,k$1;

@@ -388,7 +388,7 @@ if (!console) {
    }
    finally
    {
-    if("Dispose"in e)
+    if(typeof e=="object"&&"Dispose"in e)
      e.Dispose();
    }
   });
@@ -532,7 +532,7 @@ if (!console) {
  };
  Pervasives.Test=function(name)
  {
-  return new TestBuilder.New(name);
+  return new TestBuilder.New(name,true);
  };
  TestCategoryBuilder=Pervasives.TestCategoryBuilder=Runtime.Class({},Obj,TestCategoryBuilder);
  TestCategoryBuilder.New=Runtime.Ctor(function(name)
@@ -605,44 +605,46 @@ if (!console) {
  TestBuilder=Pervasives.TestBuilder=Runtime.Class({
   Run:function(e)
   {
-   QUnit.test(this.name,function(asserter)
-   {
-    var m,asy,done,b;
-    try
+   if(this.doRun)
+    QUnit.test(this.name,function(asserter)
     {
-     m=e(asserter);
-     m.$==1?(asy=m.$0,(done=asserter.async(),Concurrency.Start((b=null,Concurrency.Delay(function()
+     var m,asy,done,b;
+     try
      {
-      return Concurrency.TryFinally(Concurrency.Delay(function()
+      m=e(asserter);
+      m.$==1?(asy=m.$0,(done=asserter.async(),Concurrency.Start((b=null,Concurrency.Delay(function()
       {
-       return Concurrency.TryWith(Concurrency.Delay(function()
+       return Concurrency.TryFinally(Concurrency.Delay(function()
        {
-        return Concurrency.Bind(Runner$1.WithTimeout(1000,asy),function()
+        return Concurrency.TryWith(Concurrency.Delay(function()
         {
+         return Concurrency.Bind(Runner$1.WithTimeout(1000,asy),function()
+         {
+          return Concurrency.Return(null);
+         });
+        }),function(a)
+        {
+         asserter.equal(a,null,"Test threw an unexpected asynchronous exception");
          return Concurrency.Return(null);
         });
-       }),function(a)
+       }),function()
        {
-        asserter.equal(a,null,"Test threw an unexpected asynchronous exception");
-        return Concurrency.Return(null);
+        done();
        });
-      }),function()
-      {
-       done();
-      });
-     })),null))):null;
-    }
-    catch(e$1)
-    {
-     asserter.equal(e$1,null,"Test threw an unexpected synchronous exception");
-    }
-   });
+      })),null))):null;
+     }
+     catch(e$1)
+     {
+      asserter.equal(e$1,null,"Test threw an unexpected synchronous exception");
+     }
+    });
   }
  },SubtestBuilder,TestBuilder);
- TestBuilder.New=Runtime.Ctor(function(name)
+ TestBuilder.New=Runtime.Ctor(function(name,doRun)
  {
   SubtestBuilder.New.call(this);
   this.name=name;
+  this.doRun=doRun;
  },TestBuilder);
  Unchecked.Equals=function(a,b)
  {

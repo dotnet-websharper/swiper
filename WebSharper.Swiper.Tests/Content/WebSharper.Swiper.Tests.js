@@ -255,6 +255,12 @@ IntelliFactory = {
             }
         },
 
+        ScriptBasePath: "./",
+
+        ScriptPath: function (a, f) {
+            return this.ScriptBasePath + (this.ScriptSkipAssemblyDir ? "" : a + "/") + f;
+        },
+
         OnLoad:
             function (f) {
                 if (!("load" in this)) {
@@ -279,14 +285,14 @@ IntelliFactory = {
 }
 
 IntelliFactory.Runtime.OnLoad(function () {
-    if (window.WebSharper && WebSharper.Activator && WebSharper.Activator.Activate)
+    if (self.WebSharper && WebSharper.Activator && WebSharper.Activator.Activate)
         WebSharper.Activator.Activate()
 });
 
 // Polyfill
 
 if (!Date.now) {
-    Date.now = function now() {
+    Date.now = function () {
         return new Date().getTime();
     };
 }
@@ -295,6 +301,13 @@ if (!Math.trunc) {
     Math.trunc = function (x) {
         return x < 0 ? Math.ceil(x) : Math.floor(x);
     }
+}
+
+if (!Object.setPrototypeOf) {
+  Object.setPrototypeOf = function (obj, proto) {
+    obj.__proto__ = proto;
+    return obj;
+  }
 }
 
 function ignore() { };
@@ -323,8 +336,8 @@ if (!console) {
 (function()
 {
  "use strict";
- var Global,WebSharper,Swiper,Tests,Client,Operators,Testing,Runner,EventTarget,Node,Obj,RunnerControlBody,Arrays,SC$1,Enumerator,Pervasives,TestCategoryBuilder,SubtestBuilder,TestBuilder,Unchecked,Runner$1,T,Concurrency,AsyncBody,CT,Scheduler,SC$2,OperationCanceledException,CancellationTokenSource,QUnit,IntelliFactory,Runtime,console,Date;
- Global=window;
+ var Global,WebSharper,Swiper,Tests,Client,Operators,Testing,Runner,EventTarget,Node,Obj,RunnerControlBody,Arrays,SC$1,WindowOrWorkerGlobalScope,Enumerator,Pervasives,TestCategoryBuilder,SubtestBuilder,TestBuilder,Unchecked,Runner$1,T,Concurrency,AsyncBody,CT,Scheduler,SC$2,Error,OperationCanceledException,CancellationTokenSource,QUnit,IntelliFactory,Runtime,console,Date;
+ Global=self;
  WebSharper=Global.WebSharper=Global.WebSharper||{};
  Swiper=WebSharper.Swiper=WebSharper.Swiper||{};
  Tests=Swiper.Tests=Swiper.Tests||{};
@@ -338,6 +351,7 @@ if (!console) {
  RunnerControlBody=Runner.RunnerControlBody=Runner.RunnerControlBody||{};
  Arrays=WebSharper.Arrays=WebSharper.Arrays||{};
  SC$1=Global.StartupCode$WebSharper_Swiper_Tests$Client=Global.StartupCode$WebSharper_Swiper_Tests$Client||{};
+ WindowOrWorkerGlobalScope=Global.WindowOrWorkerGlobalScope;
  Enumerator=WebSharper.Enumerator=WebSharper.Enumerator||{};
  Pervasives=Testing.Pervasives=Testing.Pervasives||{};
  TestCategoryBuilder=Pervasives.TestCategoryBuilder=Pervasives.TestCategoryBuilder||{};
@@ -351,6 +365,7 @@ if (!console) {
  CT=Concurrency.CT=Concurrency.CT||{};
  Scheduler=Concurrency.Scheduler=Concurrency.Scheduler||{};
  SC$2=Global.StartupCode$WebSharper_Main$Concurrency=Global.StartupCode$WebSharper_Main$Concurrency||{};
+ Error=Global.Error;
  OperationCanceledException=WebSharper.OperationCanceledException=WebSharper.OperationCanceledException||{};
  CancellationTokenSource=WebSharper.CancellationTokenSource=WebSharper.CancellationTokenSource||{};
  QUnit=Global.QUnit;
@@ -360,7 +375,7 @@ if (!console) {
  Date=Global.Date;
  Client.RunTests=function()
  {
-  Runner.RunTests([Client.Tests()]).ReplaceInDom(Global.document.querySelector("#container"));
+  Runner.RunTests([Client.Tests()]).ReplaceInDom(self.document.querySelector("#container"));
  };
  Client.Tests=function()
  {
@@ -369,7 +384,7 @@ if (!console) {
  };
  Operators.FailWith=function(msg)
  {
-  throw Global.Error(msg);
+  throw new Error(msg);
  };
  Runner.RunTests=function(tests)
  {
@@ -399,16 +414,20 @@ if (!console) {
    return this===obj;
   }
  },null,Obj);
+ Obj.New=Runtime.Ctor(function()
+ {
+ },Obj);
  RunnerControlBody=Runner.RunnerControlBody=Runtime.Class({
   ReplaceInDom:function(e)
   {
    var fixture,qunit,parent;
-   Unchecked.Equals(Global.document.querySelector("#qunit"),null)?(fixture=Global.document.createElement("div"),fixture.setAttribute("id","qunit-fixture"),qunit=Global.document.createElement("div"),qunit.setAttribute("id","qunit"),parent=e.parentNode,parent.replaceChild(fixture,e),parent.insertBefore(qunit,fixture)):void 0;
+   Unchecked.Equals(self.document.querySelector("#qunit"),null)?(fixture=self.document.createElement("div"),fixture.setAttribute("id","qunit-fixture"),qunit=self.document.createElement("div"),qunit.setAttribute("id","qunit"),parent=e.parentNode,parent.replaceChild(fixture,e),parent.insertBefore(qunit,fixture)):void 0;
    this.run();
   }
  },Obj,RunnerControlBody);
  RunnerControlBody.New=Runtime.Ctor(function(run)
  {
+  Obj.New.call(this);
   this.run=run;
  },RunnerControlBody);
  Arrays.get=function(arr,n)
@@ -537,6 +556,7 @@ if (!console) {
  TestCategoryBuilder=Pervasives.TestCategoryBuilder=Runtime.Class({},Obj,TestCategoryBuilder);
  TestCategoryBuilder.New=Runtime.Ctor(function(name)
  {
+  Obj.New.call(this);
   this.name=name;
  },TestCategoryBuilder);
  SubtestBuilder=Pervasives.SubtestBuilder=Runtime.Class({
@@ -601,6 +621,7 @@ if (!console) {
  },Obj,SubtestBuilder);
  SubtestBuilder.New=Runtime.Ctor(function()
  {
+  Obj.New.call(this);
  },SubtestBuilder);
  TestBuilder=Pervasives.TestBuilder=Runtime.Class({
   Run:function(e)
@@ -759,6 +780,7 @@ if (!console) {
  },Obj,T);
  T.New=Runtime.Ctor(function(s,c,n,d)
  {
+  Obj.New.call(this);
   this.s=s;
   this.c=c;
   this.n=n;
@@ -965,6 +987,7 @@ if (!console) {
  },Obj,Scheduler);
  Scheduler.New=Runtime.Ctor(function()
  {
+  Obj.New.call(this);
   this.idle=true;
   this.robin=[];
  },Scheduler);
@@ -983,7 +1006,7 @@ if (!console) {
    });
   };
  };
- OperationCanceledException=WebSharper.OperationCanceledException=Runtime.Class({},null,OperationCanceledException);
+ OperationCanceledException=WebSharper.OperationCanceledException=Runtime.Class({},Error,OperationCanceledException);
  OperationCanceledException.New=Runtime.Ctor(function(ct)
  {
   OperationCanceledException.New$1.call(this,"The operation was canceled.",null,ct);
@@ -992,11 +1015,13 @@ if (!console) {
  {
   this.message=message;
   this.inner=inner;
+  Global.Object.setPrototypeOf(this,OperationCanceledException.prototype);
   this.ct=ct;
  },OperationCanceledException);
  CancellationTokenSource=WebSharper.CancellationTokenSource=Runtime.Class({},Obj,CancellationTokenSource);
  CancellationTokenSource.New=Runtime.Ctor(function()
  {
+  Obj.New.call(this);
   this.c=false;
   this.pending=null;
   this.r=[];
@@ -1009,5 +1034,7 @@ if (!console) {
 }());
 
 
-if (typeof IntelliFactory !=='undefined')
+if (typeof IntelliFactory !=='undefined') {
+  IntelliFactory.Runtime.ScriptBasePath = '/Content/';
   IntelliFactory.Runtime.Start();
+}

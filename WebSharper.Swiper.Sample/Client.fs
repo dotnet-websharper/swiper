@@ -35,7 +35,7 @@ module Client =
                     swiper.UnlockSwipeToNext()
                     swiper.SlideNext()
                     let newSlide () =
-                        div [attr.``class`` "swiper-slide"] [
+                        Elt.div [attr.``class`` "swiper-slide"] [
                             text "You have finished the tutorial!"
                         ]
                     swiper.AppendSlide( (newSlide()).Dom )

@@ -6,7 +6,7 @@
 /*/obj/
 /packages/
 /tools/packages/
-/*.Sample/Content/
+/*.Tests/Content/
 
 bin/
 obj/

@@ -1,0 +1,11 @@
+{
+  "name": "websharper.swiper.sample",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "esbuild": "^0.28.1"
+  },
+  "dependencies": {
+    "swiper": "^14.4.0"
+  }
+}

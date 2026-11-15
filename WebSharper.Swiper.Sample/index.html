@@ -1,85 +1,199 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>WebSharper.Swiper.Sample</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="Content/WebSharper.Swiper.Sample.css" />
-    <style>
-        /* Don't show the not-yet-loaded templates */
-        [ws-template], [ws-children-template] { display: none; }
-        #container {
-            width: 500px;
-            margin: auto;
-        }
-        .swiper-container {
-            width: 500px;
-            height: 300px;
-            margin: 20px auto;
-        }
-
-        .swiper-slide {
-            background-color: lightcyan;
-            text-align: center;
-            font-size: 24px;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            -webkit-justify-content: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            -webkit-align-items: center;
-            align-items: center;
-        }
-        .title {
-            display: block;
-        }
-    </style>
-    <script type="text/javascript" src="Content/WebSharper.Swiper.Sample.head.js"></script>
+    <title>WebSharper.Swiper — sample</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%234f46e5'/%3E%3Cpath d='M5 3.5v9l7-4.5z' fill='%23ffffff'/%3E%3C/svg%3E" />
+    <script>
+        // Apply a previously chosen theme before first paint. Light is the
+        // default; the key is shared with Client.fs (themeStorageKey).
+        try {
+            var t = localStorage.getItem('websharper-swiper-theme');
+            if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+        } catch (e) { }
+    </script>
+    <!-- Swiper ships its stylesheet with the npm package; esbuild copies it to dist/.
+         The WebSharper head (module scripts) is folded in here by esbuild. -->
+    <link rel="stylesheet" href="swiper-bundle.css" />
+    <link rel="stylesheet" href="site.css" />
+    <!-- ws-head -->
 </head>
-<body id="main">
-    <div id="container">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide" data-hash="slide1">Let's look at F# syntax!</div>
-                <div class="swiper-slide" data-hash="slide2">
-                    This is how we create an array:
+<body>
+    <header class="app-header">
+        <div class="app-titles">
+            <h1>WebSharper.Swiper</h1>
+            <p>Swiper 14.4.0 bindings for F# — with <a href="https://websharper.com">WebSharper</a></p>
+        </div>
+        <div class="app-actions">
+            <button class="btn theme-toggle" ws-onclick="ToggleTheme" title="Switch between the light and dark theme">
+                <span>${themeLabel}</span>
+            </button>
+            <a class="app-source" href="https://github.com/dotnet-websharper/swiper">Source</a>
+        </div>
+    </header>
+
+    <main class="page">
+        <section class="card hero-card">
+            <header class="card-header">
+                <h2>Hero slider</h2>
+                <p>Navigation, pagination, scrollbar, keyboard, mousewheel, a11y, autoplay, zoom, thumbs and slide manipulation.</p>
+            </header>
+
+            <div class="swiper hero-swiper" id="hero-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <div class="hero-slide slide-indigo">
+                                <span class="slide-number">01</span>
+                                <h3>Modules</h3>
+                                <p>Feature modules are imported from <code>swiper/modules</code> and listed in <code>Modules</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <div class="hero-slide slide-sky">
+                                <span class="slide-number">02</span>
+                                <h3>Typed options</h3>
+                                <p>Every core and module option is a typed property with a matching <code>*Options</code> class.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <div class="hero-slide slide-teal">
+                                <span class="slide-number">03</span>
+                                <h3>Strongly typed events</h3>
+                                <p>The <code>On</code> option exposes all events with their real handler signatures.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <div class="hero-slide slide-amber">
+                                <span class="slide-number">04</span>
+                                <h3>Module APIs</h3>
+                                <p><code>swiper.Navigation</code>, <code>swiper.Pagination</code>, <code>swiper.Zoom</code> and friends are typed too.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <div class="hero-slide slide-rose">
+                                <span class="slide-number">05</span>
+                                <h3>Manipulation</h3>
+                                <p>Add and remove slides at runtime with the manipulation module, then <code>Update()</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <div class="hero-slide slide-violet">
+                                <span class="slide-number">06</span>
+                                <h3>Theming</h3>
+                                <p>The sample is light by default and the header host toggles a dark palette.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="swiper-slide" data-hash="slide3">
-                    <pre>let myArray = [|1; 2; 3|]</pre>
-                </div>
-                <div class="swiper-slide" data-hash="slide4">
-                    This is how we create a list:
-                </div>
-                <div class="swiper-slide" data-hash="slide4">
-                    <pre>let myList = [1; 2; 3]</pre>
-                </div>
-                <div class="swiper-slide" data-hash="slide5">
-                    This is how we create a sequence:
-                </div>
-                <div class="swiper-slide" data-hash="slide6">
-                    <pre>let mySequence = seq { 1..3 }</pre>
-                </div>
-                <div class="swiper-slide" data-hash="slide7">
-                    Question! <br/> Which is the correct syntax to define a list?
-                </div>
-                <div class="swiper-slide" data-hash="slide8">
-                    <ol type="A">
-                        <li><pre>let myList = [|1; 2; 3|]</pre></li>
-                        <li><pre>let myList = seq { 1..3 }</pre></li>
-                        <li><pre>let myList = [1; 2; 3]</pre></li>
-                    </ol>
-                </div>
-                <div class="swiper-slide" data-hash="slide9">
-                    Good job!
+                <div class="swiper-button-prev" id="hero-prev"></div>
+                <div class="swiper-button-next" id="hero-next"></div>
+                <div class="swiper-pagination" id="hero-pagination"></div>
+                <div class="swiper-scrollbar" id="hero-scrollbar"></div>
+            </div>
+
+            <div class="toolbar">
+                <button class="btn" ws-onclick="Prev">← Prev</button>
+                <button class="btn" ws-onclick="Next">Next →</button>
+                <button class="btn" ws-onclick="SlideToThird">SlideTo 2</button>
+                <button class="btn" ws-onclick="ToggleAutoplay">${autoplayLabel}</button>
+                <button class="btn" ws-onclick="ZoomIn">Zoom in</button>
+                <button class="btn" ws-onclick="ZoomOut">Zoom out</button>
+                <button class="btn" ws-onclick="ToggleKeyboard">${keyboardLabel}</button>
+                <button class="btn" ws-onclick="ToggleDirection">Change direction</button>
+                <button class="btn" ws-onclick="AppendSlide">Append slide</button>
+                <button class="btn" ws-onclick="RemoveLast">Remove slide</button>
+                <button class="btn" ws-onclick="SetProgress">SetProgress 50%</button>
+                <button class="btn" ws-onclick="ToggleEnabled">Disable / enable</button>
+                <button class="btn" ws-onclick="Update">Update</button>
+                <button class="btn" ws-onclick="Reset">Re-create</button>
+            </div>
+
+            <dl class="readouts">
+                <div><dt>Active index</dt><dd>${activeIndex}</dd></div>
+                <div><dt>Real index</dt><dd>${realIndex}</dd></div>
+                <div><dt>Progress</dt><dd>${progress}</dd></div>
+                <div><dt>Translate</dt><dd>${translate}</dd></div>
+                <div><dt>Slides</dt><dd>${slideCount}</dd></div>
+                <div><dt>Slides per view</dt><dd>${perView}</dd></div>
+                <div><dt>Direction</dt><dd>${direction}</dd></div>
+                <div><dt>Beginning / end</dt><dd>${beginEnd}</dd></div>
+                <div><dt>Animating</dt><dd>${animating}</dd></div>
+                <div><dt>Autoplay</dt><dd>${autoplayState}</dd></div>
+                <div><dt>Zoom scale</dt><dd>${zoomScale}</dd></div>
+            </dl>
+
+            <p class="status">${status}</p>
+        </section>
+
+        <section class="card thumbs-card">
+            <header class="card-header">
+                <h2>Thumbs</h2>
+                <p>The thumb swiper uses the <code>Thumbs</code> module, free mode and a grid layout, and stays in sync with the hero slider.</p>
+            </header>
+            <div class="swiper thumbs-swiper" id="thumbs-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide thumb thumb-indigo"><span>01</span></div>
+                    <div class="swiper-slide thumb thumb-sky"><span>02</span></div>
+                    <div class="swiper-slide thumb thumb-teal"><span>03</span></div>
+                    <div class="swiper-slide thumb thumb-amber"><span>04</span></div>
+                    <div class="swiper-slide thumb thumb-rose"><span>05</span></div>
+                    <div class="swiper-slide thumb thumb-violet"><span>06</span></div>
                 </div>
             </div>
-        </div>
-    </div>
-    <script type="text/javascript" src="Content/WebSharper.Swiper.Sample.min.js"></script>
+        </section>
+
+        <section class="card effects-card">
+            <header class="card-header">
+                <h2>Effects</h2>
+                <p>Re-creates the slider with each effect module and its typed effect options.</p>
+            </header>
+            <div class="toolbar effect-tabs">
+                <button class="btn effect-tab" id="tab-slide" data-effect="slide" ws-onclick="UseSlide">Slide</button>
+                <button class="btn effect-tab" id="tab-fade" data-effect="fade" ws-onclick="UseFade">Fade</button>
+                <button class="btn effect-tab" id="tab-cube" data-effect="cube" ws-onclick="UseCube">Cube</button>
+                <button class="btn effect-tab" id="tab-coverflow" data-effect="coverflow" ws-onclick="UseCoverflow">Coverflow</button>
+                <button class="btn effect-tab" id="tab-flip" data-effect="flip" ws-onclick="UseFlip">Flip</button>
+                <button class="btn effect-tab" id="tab-creative" data-effect="creative" ws-onclick="UseCreative">Creative</button>
+                <button class="btn effect-tab" id="tab-cards" data-effect="cards" ws-onclick="UseCards">Cards</button>
+            </div>
+            <div class="swiper effect-swiper" id="effect-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide effect-slide effect-1"><h3>Slide</h3><p>The default effect.</p></div>
+                    <div class="swiper-slide effect-slide effect-2"><h3>Fade</h3><p>Cross-fading slides.</p></div>
+                    <div class="swiper-slide effect-slide effect-3"><h3>Cube</h3><p>A rotating 3D cube.</p></div>
+                    <div class="swiper-slide effect-slide effect-4"><h3>Coverflow</h3><p>Perspective covers.</p></div>
+                    <div class="swiper-slide effect-slide effect-5"><h3>Cards</h3><p>A stack of cards.</p></div>
+                </div>
+                <div class="swiper-pagination" id="effect-pagination"></div>
+            </div>
+            <p class="status">Current effect: <strong>${effectName}</strong></p>
+        </section>
+
+        <section class="card">
+            <header class="card-header">
+                <h2>What this sample exercises</h2>
+            </header>
+            <ul class="features">
+                <li><code>Swiper</code> construction from a selector, <code>SwiperOptions</code> with core and module options.</li>
+                <li>Module imports: <code>SwiperModule.Navigation</code>, <code>Pagination</code>, <code>Scrollbar</code>, <code>Keyboard</code>, <code>Mousewheel</code>, <code>A11y</code>, <code>Autoplay</code>, <code>Zoom</code>, <code>Manipulation</code>, <code>Thumbs</code>, <code>FreeMode</code>, <code>Grid</code> and every effect module.</li>
+                <li>Typed events through <code>SwiperEventHandlers</code> (<code>Init</code>, <code>SlideChange</code>, <code>Progress</code>, <code>ZoomChange</code>, <code>AutoplayStart</code>/<code>Stop</code>, …).</li>
+                <li>Instance API: <code>SlideNext</code>/<code>SlidePrev</code>, <code>SlideTo</code>, <code>ChangeDirection</code>, <code>Update</code>, <code>AppendSlide</code>, <code>RemoveSlide</code>, <code>Destroy</code>, <code>Enable</code>/<code>Disable</code>, <code>SlidesPerViewDynamic</code>, <code>GetSlideIndex</code>.</li>
+                <li>Module APIs: <code>Navigation.NextEl</code>, <code>Pagination.Bullets</code>, <code>Autoplay.Running</code>/<code>Start</code>/<code>Stop</code>, <code>Zoom.In</code>/<code>Out</code>/<code>Scale</code>, <code>Keyboard.Enable</code>/<code>Disable</code>, <code>Thumbs.Update</code>, <code>Grid.Rows</code>.</li>
+            </ul>
+        </section>
+    </main>
+    <script type="text/javascript" src="Scripts/WebSharper.Swiper.Sample.min.js"></script>
 </body>
 </html>

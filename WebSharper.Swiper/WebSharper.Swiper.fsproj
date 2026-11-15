@@ -1,13 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
-    <WebSharperProject>Extension</WebSharperProject>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <WebSharperProject>binding</WebSharperProject>
     <WebSharperSourceMap>false</WebSharperSourceMap>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);FS3886</NoWarn>
+    <Product>WebSharper.Swiper 14.4.0+</Product>
+    <Title>https://github.com/dotnet-websharper/swiper/</Title>
+    <Company>IntelliFactory</Company>
+    <Copyright>(c) 2008-2026 IntelliFactory</Copyright>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NpmDependencies>
+      <NpmPackage Name="swiper" Version="&gt;= 14.4.0 &lt; 15.0.0" ResolutionStrategy="Max" />
+    </NpmDependencies>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.fs" />
+    <None Include="wsconfig.json" />
   </ItemGroup>
-  <Import Project="..\paket-files\wsbuild\github.com\dotnet-websharper\build-script\WebSharper.Fake.targets" Condition="Exists('..\paket-files\wsbuild\github.com\dotnet-websharper\build-script\WebSharper.Fake.targets')" />
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
